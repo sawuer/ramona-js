@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="ramona.js"></script>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script type="text/javascript">
+	
+
+
+
+
+// NEW EXAMPLE INSTANCE
+new Ramona({
+	ENTRY: '#app',
+
+	DATA: {
+		firstButtonName: 'First toggle',
+		secondButtonName: 'Second toggle',
+	},
+
+	STATES: {
+		first: true,
+		second: false
+	},
+
+	LOGIC() {
+		
+		// Change STATES via "show" method
+		this._('#hide-first').onclick = () => {
+			this.STATES.first ? this.STATES.first = !this.STATES.first : this.STATES.first = !this.STATES.first;
+			// this.show(this.STATES.first, this.VIEW().first)
+			this.rerender();
+		}
+
+		this._('#hide-second').onclick = () => {
+			this.STATES.second ? this.STATES.second = !this.STATES.second : this.STATES.second = !this.STATES.second;
+			// this.show(this.STATES.second, this.VIEW().second)
+			this.rerender();
+		}
+
+	},
+
+	VIEW() {
+		return {
+			first: `
+				<First>
+					First
+				</First>
+			`,
+			second: `
+				<Second>
+					Second
+				</Second>
+			`,
+			toggler: `
+				<Toggler>
+					<button id="hide-first">
+						${this.DATA.firstButtonName}
+					</button>
+					<button id="hide-second">
+						${this.DATA.secondButtonName}
+					</button>
+				</Toggler>
+			`,
+
+			// Main function for init all views
+			render() {
+				return `
+					${this.toggler}
+					<div>
+						${this.first}
+						${this.second}
+					</div>
+				`;
+			}
+		}
+	}
+
+});
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
