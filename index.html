@@ -30,7 +30,7 @@ new Ramona({
 	},
 
 	LOGIC() {
-		
+
 		// Change STATES via "show" method
 		this._('#hide-first').onclick = () => {
 			this.STATES.first ? this.STATES.first = !this.STATES.first : this.STATES.first = !this.STATES.first;
@@ -53,11 +53,13 @@ new Ramona({
 					First
 				</First>
 			`,
+			
 			second: `
 				<Second>
 					Second
 				</Second>
 			`,
+			
 			toggler: `
 				<Toggler>
 					<button id="hide-first">
