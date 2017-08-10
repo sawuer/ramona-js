@@ -1,12 +1,12 @@
 var Ramona = (function() {
 	return function(conf) {
 		this.die = () => {
-			conf.$(conf.ENTRY).innerHTML = '';
+			conf._(conf.entry).innerHTML = '';
 		}
 		/** 
 		 * Inner method for getting into dom
 		 */
-		conf.$ = (el) => {
+		conf._ = (el) => {
 			var all = document.querySelectorAll(el);
 			return all.length > 1 ? all : document.querySelector(el);
 		}
@@ -31,15 +31,15 @@ var Ramona = (function() {
 		  return new F();
 		}
 		// Views
-		const views = Object.duplicate(conf.VIEW());
+		const views = Object.duplicate(conf.view());
 
 		function render() {
-			conf.$(conf.ENTRY).innerHTML = conf.VIEW().render();
+			conf._(conf.entry).innerHTML = conf.view().render();
 		}
 
 		/** 
 		 * Show template contains in view  
-		 * depending on STATES object property
+		 * depending on state object property
 		 */
 		function show(state, view) {
 			function parseTagName(view) {
@@ -53,34 +53,34 @@ var Ramona = (function() {
 			if (parseTagName(view).toLowerCase() in views.__proto__) {
 				var template = views.__proto__[parseTagName(view).toLowerCase()];
 				if (state) {
-					conf.$(parseTagName(view)).innerHTML = parseProtoStr(template).trim();
+					conf._(parseTagName(view)).innerHTML = parseProtoStr(template).trim();
 				} else {
-					conf.$(parseTagName(view)).innerHTML = '';
+					conf._(parseTagName(view)).innerHTML = '';
 				}
 			}
 		}
 
 		function rerender() {
-			var data = Object.duplicate(conf.STATES);
+			var data = Object.duplicate(conf.state);
 			var dataArray = Object.keys(data.__proto__);
 			for (var i in data.__proto__) {
 				if (dataArray.includes(i)) {
-					show(conf.STATES[i], conf.VIEW()[i]);
+					show(conf.state[i], conf.view()[i]);
 				}
 			}	
 		}
 
 		// Init all template into entry element
 		render()
+		conf.logic();
 		rerender();
-		conf.LOGIC();
 
 
 		// Watcher
-		conf.$(conf.ENTRY).onclick = () => {
-			render()
+		conf._(conf.entry).onclick = () => {
+			render();
 			rerender();
-			conf.LOGIC();
+			conf.logic();
 		}
 	}
 

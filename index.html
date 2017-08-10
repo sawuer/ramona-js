@@ -8,89 +8,20 @@
 <body>
 
 <div id="app"></div>
+<div id="app2"></div>
 
-<script type="text/javascript">
 	
 
 
 
 
-// NEW EXAMPLE INSTANCE
-new Ramona({
-	ENTRY: '#app',
-
-	DATA: {
-		firstButtonName: 'First close',
-		secondButtonName: 'Second close',
-	},
-
-	STATES: {
-		first: true,
-		second: true
-	},
-
-	LOGIC() {
-		this.$('#hide-first').onclick = () => {
-			this.STATES.first ? this.STATES.first = !this.STATES.first : this.STATES.first = !this.STATES.first;
-			this.DATA.firstButtonName = this.DATA.firstButtonName == 'First close' ? 'First open' : 'First close';
-		}
-		this.$('#hide-second').onclick = () => {
-			this.STATES.second ? this.STATES.second = !this.STATES.second : this.STATES.second = !this.STATES.second;
-			this.DATA.secondButtonName = this.DATA.secondButtonName == 'Second close' ? 'Second open' : 'Second close';
-		}
-	},
-
-	VIEW() {
-		return {
-			first: `
-				<First>
-					<div>
-						First Component
-					</div>
-				</First>
-			`,
-
-			second: `
-				<Second>
-					<div>
-						Second Component
-					</div>
-				</Second>
-			`,
-
-			toggler: `
-				<Toggler>
-					<button id="hide-first">
-						${this.DATA.firstButtonName}
-					</button>
-					<button id="hide-second">
-						${this.DATA.secondButtonName}
-					</button>
-				</Toggler>
-			`,
-
-			// Main function for init all views
-			render() {
-				return `
-					${this.toggler}
-					<div>
-						${this.first}
-						${this.second}
-					</div>
-				`;
-			}
-		}
-	}
-
-});
 
 
 
 
 
 
-
-
-</script>
+<script type="text/javascript" src="example1.js"></script>
+<!-- <script type="text/javascript" src="example2.js"></script> -->
 </body>
 </html>
