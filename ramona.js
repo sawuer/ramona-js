@@ -44,7 +44,7 @@ var Ramona = (function() {
 		 * Show template contains in view  
 		 * depending on state object property
 		 */
-		 console.log(views.__proto__)
+		 // console.log(views.__proto__)
 		function show(state, view) {
 			if (!(view.includes(' id='))) {
 				throw new Error('Add id to your view component');
@@ -59,12 +59,12 @@ var Ramona = (function() {
 				var inner = input.slice(startOfLT+1, input.indexOf('</div>')).trim()
 				return inner;
 			}
-			console.log('#' + parseId(view))
+			// console.log('#' + parseId(view))
 			var id = '#' + parseId(view);
 			// console.log(parseId(view) in views.__proto__)
 			if (parseId(view) in views.__proto__) {
 				var template = views.__proto__[parseId(view)];
-					console.log(state)
+					// console.log(state)
 				if (state) {
 					conf._(id).innerHTML = parseProtoStr(template).trim();
 				} else {
@@ -84,16 +84,20 @@ var Ramona = (function() {
 		}
 
 		// Init all template into entry element
-		render()
-		conf.logic();
+		render();
 		rerender();
+		conf.logic();
 
 
 		// Watcher
 		conf._(conf.entry).onclick = () => {
-			render();
-			rerender();
-			conf.logic();
+			setTimeout(function() {
+				conf.logic();
+				rerender();
+				render();
+				conf.logic();
+
+			}, 10);
 		}
 	}
 

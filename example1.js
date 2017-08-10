@@ -83,7 +83,9 @@ new Ramona({
 		var $ = this;
 
 		$._('#change-title').onclick = () => {
+			$.state.container = $.state.container == true ?  false : true;
 			$.data.title = $.data.title == 'Title' ?  'New Title' : 'Title';
+			console.log($.data.title)
 		}
 	},
 	view() {
