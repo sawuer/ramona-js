@@ -69,3 +69,45 @@
 
 // });
 
+new Ramona({
+	entry: '#app',
+	data: {
+		title: 'Title',
+		btnName: 'Change Title'
+	},
+	state: {
+		myHeader: true
+	},
+	logic() {
+		var $ = this;
+
+		$._('#change-title').onclick = () => {
+			$.data.title = 'new title';
+			console.log($.data.title)
+		}
+	},
+	view() {
+		return {
+			myHeader: `
+				<div id="myHeader">
+					${this.data.title}
+					<button id="change-title">${this.data.btnName}</button>
+				</div>
+			`,
+			render() {
+				return `
+					${this.myHeader}
+				`
+			}
+		}
+	}
+});
+
+
+
+
+
+
+
+
+
