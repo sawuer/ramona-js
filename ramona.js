@@ -1,6 +1,8 @@
 var Ramona = (function() {
 
 	return function(conf) {
+		this.data = conf.data;
+		this.entry = conf.entry;
 
 		/** 
 		 * Method for avoid app 

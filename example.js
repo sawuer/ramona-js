@@ -1,4 +1,4 @@
-new Ramona({
+var app = new Ramona({
 	entry: '#app',
 
 	data: {

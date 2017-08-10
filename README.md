@@ -51,6 +51,19 @@ new Ramona({
 You can notice that state prop "header" are equal view() prop and name of this tag.
 This is the only way to create a dependency of "state" and "views()".
 
+You can "die" your instance using die() method like that:
+```
+var myApp = new Ramona({
+  // All props
+})
+myApp.die(); // use it anywhere in your app
+```
+You can also use public props if you want:
+```
+myApp.data.title; // 'Title'
+myApp.entry; // '#myAppName'
+```
+It's all for now!
 
 ## Author
 
