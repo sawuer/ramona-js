@@ -6,11 +6,11 @@ Now better use the others libs like Vue or React)))
 
 ## Getting Started
 
-1. Download or clone copy of this project
+1. Download or clone project copy
 2. Include ramona.js to the top of your page
 3. Create some div behind body tag with id or class (id is better)
-4. Then include js file into bottom of the body tag
-5. In the js file add next code:
+4. Then include js-file into bottom of the body tag
+5. Into js-file add next code:
 ```
 new Ramona({
   entry: '#myAppName',
@@ -32,7 +32,7 @@ new Ramona({
           <div>
             ${this.data.title}
           </div>
-	      </header>
+        </header>
       `,
       render() {
         return `
