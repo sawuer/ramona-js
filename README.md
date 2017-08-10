@@ -1,8 +1,9 @@
 # Ramona Js - simple javascript lib for creating useful components
-This is my first attempt to create my own Javascript library-framework.
-This is a fairly simple library. 
-But soon it will become a powerful tool in the hands of the front end developer.
-Now better use the others libs like Vue or React)))
+This is first attempt to create my own Javascript library/framework.
+This is a fairly simple library and a little bit dumb.
+But soon it will become a powerful tool in the hands of the front end developers.
+Or only in my hands...
+Now better use the others normal libs like Vue or React :)
 
 ## Getting Started
 
