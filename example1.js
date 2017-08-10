@@ -76,27 +76,33 @@ new Ramona({
 		btnName: 'Change Title'
 	},
 	state: {
-		myHeader: true
+		header: true,
+		container: true
 	},
 	logic() {
 		var $ = this;
 
 		$._('#change-title').onclick = () => {
-			$.data.title = 'new title';
-			console.log($.data.title)
+			$.data.title = $.data.title == 'Title' ?  'New Title' : 'Title';
 		}
 	},
 	view() {
 		return {
-			myHeader: `
-				<div id="myHeader">
+			header: `
+				<div id="header">
 					${this.data.title}
 					<button id="change-title">${this.data.btnName}</button>
 				</div>
 			`,
+			container: `
+				<div id="container">
+					Container
+				</div>
+			`,
 			render() {
 				return `
-					${this.myHeader}
+					${this.header}
+					${this.container}
 				`
 			}
 		}

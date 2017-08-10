@@ -44,13 +44,14 @@ var Ramona = (function() {
 		 * Show template contains in view  
 		 * depending on state object property
 		 */
+		 console.log(views.__proto__)
 		function show(state, view) {
 			if (!(view.includes(' id='))) {
 				throw new Error('Add id to your view component');
 			}
 			function parseId(view) {
 				var first = view.indexOf(' id=') + 5;
-				return '#' + view.slice(first, view.indexOf('"', first));
+				return view.slice(first, view.indexOf('"', first));
 			}
 			function parseProtoStr(input) {
 				var firstTag = input.slice(input.indexOf('<'), input.indexOf('>')+1);
@@ -58,14 +59,16 @@ var Ramona = (function() {
 				var inner = input.slice(startOfLT+1, input.indexOf('</div>')).trim()
 				return inner;
 			}
-			
+			console.log('#' + parseId(view))
+			var id = '#' + parseId(view);
+			// console.log(parseId(view) in views.__proto__)
 			if (parseId(view) in views.__proto__) {
 				var template = views.__proto__[parseId(view)];
-				console.log(parseProtoStr(template))
+					console.log(state)
 				if (state) {
-					conf._(parseId(view)).innerHTML = parseProtoStr(template).trim();
+					conf._(id).innerHTML = parseProtoStr(template).trim();
 				} else {
-					conf._(parseId(view)).innerHTML = '';
+					conf._(id).innerHTML = '';
 				}
 			}
 		}
