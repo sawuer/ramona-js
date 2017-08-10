@@ -13,45 +13,45 @@ Now better use the others libs like Vue or React)))
 5. In the js file add next code:
 ```
 new Ramona({
- entry: '#myAppName',
- data: {
-  title: 'Title'
- },
- state: {
-  header: true
- },
- logic() {
-  var $ = this;
-  // all logic
-  // get data or states via $.data.title/$.state.header
- },
- view() {
-  return {
-   header: `
-    <header>
-     <div>
-      ${this.data.title}
-     </div>
-	  </header>
-   `,
-   render() {
-    return `
-     ${this.header}
-    `;
-   }
+  entry: '#myAppName',
+  data: {
+    title: 'Title'
+  },
+  state: {
+    header: true
+  },
+  logic() {
+    var $ = this;
+    // all logic
+    // get data or states via $.data.title/$.state.header
+  },
+  view() {
+    return {
+      header: `
+        <header>
+          <div>
+            ${this.data.title}
+          </div>
+	      </header>
+      `,
+      render() {
+        return `
+          ${this.header}
+        `;
+      }
+    }
   }
- }
 });
 ```
-* entry - element or your component/app
-* data - all data of your component/app that used only in entry div
-* state - states of you view() templates ('header' in example)
-* logic() - all business logic of or your component/app
+* entry - entry element for component
+* data - all data of component
+* state - boolean props for watching states of view() templates
+* logic() - all business logic of your component
 * view() - templates
 
-## Authors
+## Author
 
-* **Ruslan Timurziyev** - *Work* - [Ramona Js](https://github.com/sawuer/ramona-js)
+* **Ruslan Timurziyev**  - [Github](https://github.com/sawuer/)
 
 See also the list of [contributors](https://github.com/sawuer/ramona-js/contributors) who participated in this project.
 
