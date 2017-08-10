@@ -30,9 +30,7 @@ new Ramona({
     return {
       header: `
         <header>
-          <div>
-            ${this.data.title}
-          </div>
+          <h1>${this.data.title}</h1>
         </header>
       `,
       render() {
@@ -49,6 +47,10 @@ new Ramona({
 * state - boolean props for watching states of view() templates
 * logic() - all business logic of your component
 * view() - templates
+
+You can notice that state prop "header" are equal view() prop and name of this tag.
+This is the only way to create a dependency of "state" and "views()".
+
 
 ## Author
 
