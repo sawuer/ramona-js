@@ -45,20 +45,27 @@ var Ramona = (function() {
 		 * depending on state object property
 		 */
 		function show(state, view) {
-			function parseTagName(view) {
-				return view.slice((view.indexOf('<') + 1), view.indexOf('>'));
+			if (!(view.includes(' id='))) {
+				throw new Error('Add id to your view component');
+			}
+			function parseId(view) {
+				var first = view.indexOf(' id=') + 5;
+				return '#' + view.slice(first, view.indexOf('"', first));
 			}
 			function parseProtoStr(input) {
-				var openTag = '<'+parseTagName(view)+'>';
-				var closedTag = '</'+parseTagName(view)+'>';
-				return innerInTags = input.slice(input.indexOf(openTag) + openTag.length, input.indexOf(closedTag));
+				var firstTag = input.slice(input.indexOf('<'), input.indexOf('>')+1);
+				var startOfLT = input.indexOf('>');
+				var inner = input.slice(startOfLT+1, input.indexOf('</div>')).trim()
+				return inner;
 			}
-			if (parseTagName(view).toLowerCase() in views.__proto__) {
-				var template = views.__proto__[parseTagName(view).toLowerCase()];
+			
+			if (parseId(view) in views.__proto__) {
+				var template = views.__proto__[parseId(view)];
+				console.log(parseProtoStr(template))
 				if (state) {
-					conf._(parseTagName(view)).innerHTML = parseProtoStr(template).trim();
+					conf._(parseId(view)).innerHTML = parseProtoStr(template).trim();
 				} else {
-					conf._(parseTagName(view)).innerHTML = '';
+					conf._(parseId(view)).innerHTML = '';
 				}
 			}
 		}
