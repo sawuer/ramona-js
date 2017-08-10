@@ -1,115 +1,73 @@
-// new Ramona({
-// 	entry: '#app',
-
-// 	data: {
-// 		firstButtonName: 'First close',
-// 		secondButtonName: 'Second close',
-// 	},
-
-// 	state: {
-// 		first: true,
-// 		second: true
-// 	},
-
-// 	logic() {
-// 		var $ = this;
-// 		$._('#hide-first').onclick = () => {
-// 			$.state.first ? $.state.first = !$.state.first : $.state.first = !$.state.first;
-// 			$.data.firstButtonName = $.data.firstButtonName == 'First close' ? 'First open' : 'First close';
-// 		}
-// 		$._('#hide-second').onclick = () => {
-// 			$.state.second ? $.state.second = !$.state.second : $.state.second = !$.state.second;
-// 			$.data.secondButtonName = $.data.secondButtonName == 'Second close' ? 'Second open' : 'Second close';
-// 		}
-// 	},
-
-// 	view() {
-// 		return {
-// 			first: `
-// 				<first>
-// 					<div>
-// 						First Component
-// 					</div>
-// 				</first>
-// 			`,
-
-// 			second: `
-// 				<second>
-// 					<div>
-// 						Second Component
-// 					</div>
-// 				</second>
-// 			`,
-
-// 			toggler: `
-// 				<toggler>
-// 					<button id="hide-first">
-// 						${this.data.firstButtonName}
-// 					</button>
-// 					<button id="hide-second">
-// 						${this.data.secondButtonName}
-// 					</button>
-// 					${this.data.firstButtonName}
-// 						${this.data.secondButtonName}
-// 				</toggler>
-// 			`,
-
-// 			// Main function for init all views
-// 			render() {
-// 				return `
-// 					${this.toggler}
-// 					<div>
-// 						${this.first}
-// 						${this.second}
-// 					</div>
-// 				`;
-// 			}
-// 		}
-// 	}
-
-// });
-
 new Ramona({
 	entry: '#app',
+
 	data: {
-		title: 'Title',
-		btnName: 'Change Title'
+		firstButtonName: 'First open',
+		secondButtonName: 'Second open',
 	},
+
 	state: {
-		header: true,
-		container: true
+		first: true,
+		second: true,
 	},
+
 	logic() {
 		var $ = this;
 
-		$._('#change-title').onclick = () => {
-			$.state.container = $.state.container == true ?  false : true;
-			$.data.title = $.data.title == 'Title' ?  'New Title' : 'Title';
-			console.log($.data.title)
+		$._('#hide-first').onclick = () => {
+			$.state.first ? $.state.first = !$.state.first : $.state.first = !$.state.first;
+			$.data.firstButtonName = $.data.firstButtonName == 'First close' ? 'First open' : 'First close';
+		}
+
+		$._('#hide-second').onclick = () => {
+			$.data.secondButtonName = $.data.secondButtonName == 'Second close' ? 'Second open' : 'Second close';
+			$.state.second ? $.state.second = !$.state.second : $.state.second = !$.state.second;
 		}
 	},
+
 	view() {
 		return {
-			header: `
-				<div id="header">
-					${this.data.title}
-					<button id="change-title">${this.data.btnName}</button>
-				</div>
+			first: `
+				<first>
+					<div>
+						First Component
+					</div>
+				</first>
 			`,
-			container: `
-				<div id="container">
-					Container
-				</div>
+
+			second: `
+				<second>
+					<div>
+						Second Component
+					</div>
+				</second>
 			`,
+
+			toggler: `
+				<toggler>
+					<button id="hide-first">First</button>
+					<button id="hide-second">Second</button>
+					<div>
+						${this.data.firstButtonName}
+						${this.data.secondButtonName}
+					</div.
+				</toggler>
+			`,
+
 			render() {
 				return `
-					${this.header}
-					${this.container}
-				`
+					${this.toggler}
+					<div>
+						${this.first}
+						${this.second}
+					</div>
+				`;
 			}
 		}
 	}
+
 });
+
 
 
 

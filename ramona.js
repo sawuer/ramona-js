@@ -1,5 +1,10 @@
 var Ramona = (function() {
+
 	return function(conf) {
+
+		/** 
+		 * Method for avoid app 
+		 */
 		this.die = () => {
 			conf._(conf.entry).innerHTML = '';
 		}
@@ -11,31 +16,46 @@ var Ramona = (function() {
 			var all = document.querySelectorAll(el);
 			return all.length > 1 ? all : document.querySelector(el);
 		}
+
+		/** 
+		 * Conditin: if "entry" prop 
+		 * contains existed element 
+		*/
 		if (!conf._(conf.entry)) {
-			throw new Error('Make new div with id for new Ramona instance')
+			throw new Error('You must create div with id for new Ramona instance')
 		}
+
 		/** 
 		 * Duplicate object VIEW for
 		 * constantly collection
 		 */
 		Object.duplicate = (o) => {
-	   	var makeArgs = arguments; 
-		  function F() {
-	      var prop, i=1, arg, val;
+		  function protos() {
+	      var prop, i = 1, arg, val;
 	      for (prop in o) {
-					if(!o.hasOwnProperty(prop)) continue;
+					if(!o.hasOwnProperty(prop)) {
+						continue;
+					}
 					val = o[prop];
-					arg = makeArgs[i++];
-					if(typeof arg === 'undefined') break;
+					arg = arguments[i++];
+					if(typeof arg === 'undefined') {
+						break;
+					}
 					this[prop] = arg;
 	     	}
 		  }
-		  F.prototype = o;
-		  return new F();
+		  protos.prototype = o;
+		  return new protos();
 		}
-		// Views
+
+		/** 
+		 * Views __proto__ 
+		 */
 		const views = Object.duplicate(conf.view());
 
+		/** 
+		 * Rendering all templates into "entry" element 
+		 */
 		function render() {
 			conf._(conf.entry).innerHTML = conf.view().render();
 		}
@@ -44,61 +64,75 @@ var Ramona = (function() {
 		 * Show template contains in view  
 		 * depending on state object property
 		 */
-		 // console.log(views.__proto__)
 		function show(state, view) {
-			if (!(view.includes(' id='))) {
-				throw new Error('Add id to your view component');
+
+			/** 
+			 * Parse tag name of view template 
+			 */
+			function parseTagName(view) {
+				return view.slice((view.indexOf('<') + 1), view.indexOf('>'));
 			}
-			function parseId(view) {
-				var first = view.indexOf(' id=') + 5;
-				return view.slice(first, view.indexOf('"', first));
-			}
+
+			/** 
+			 * Get prse from tags 
+			 */
 			function parseProtoStr(input) {
-				var firstTag = input.slice(input.indexOf('<'), input.indexOf('>')+1);
-				var startOfLT = input.indexOf('>');
-				var inner = input.slice(startOfLT+1, input.indexOf('</div>')).trim()
-				return inner;
+				var 
+					openTag = '<'+parseTagName(view)+'>',
+					closedTag = '</'+parseTagName(view)+'>',
+					openTagEnd = input.indexOf(openTag) + openTag.length,
+					closedTagIndex = input.indexOf(closedTag);
+				return input.slice(openTagEnd, closedTagIndex);
 			}
-			// console.log('#' + parseId(view))
-			var id = '#' + parseId(view);
-			// console.log(parseId(view) in views.__proto__)
-			if (parseId(view) in views.__proto__) {
-				var template = views.__proto__[parseId(view)];
-					// console.log(state)
+
+			/**
+			 * Inner of tamplstes
+			 */
+			var template = views.__proto__[parseTagName(view).toLowerCase()];
+			var innerTemp = parseProtoStr(template).trim();
+
+			/** 
+			 * Condigtion: if views.__proto__ contains tagname 
+			 */
+			if (parseTagName(view).toLowerCase() in views.__proto__) {
 				if (state) {
-					conf._(id).innerHTML = parseProtoStr(template).trim();
+					conf._(parseTagName(view)).innerHTML = innerTemp;
 				} else {
-					conf._(id).innerHTML = '';
+					conf._(parseTagName(view)).innerHTML = '';
 				}
 			}
+
 		}
 
+		/**
+		 * Checking states
+		 */
 		function rerender() {
-			var data = Object.duplicate(conf.state);
-			var dataArray = Object.keys(data.__proto__);
-			for (var i in data.__proto__) {
-				if (dataArray.includes(i)) {
+			var state = Object.duplicate(conf.state);
+			var stateArray = Object.keys(state.__proto__);
+			for (var i in state.__proto__) {
+				if (stateArray.includes(i)) {
 					show(conf.state[i], conf.view()[i]);
 				}
 			}	
 		}
 
-		// Init all template into entry element
-		render();
+		/** 
+		 * Init all template into entry element
+		 */
+		render()
 		rerender();
 		conf.logic();
 
-
-		// Watcher
+		/**
+		 * Watcher
+		 */
 		conf._(conf.entry).onclick = () => {
-			setTimeout(function() {
-				conf.logic();
-				rerender();
-				render();
-				conf.logic();
-
-			}, 10);
+			render();
+			rerender();
+			conf.logic();
 		}
+
 	}
 
 }());
