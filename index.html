@@ -20,46 +20,44 @@ new Ramona({
 	ENTRY: '#app',
 
 	DATA: {
-		firstButtonName: 'First toggle',
-		secondButtonName: 'Second toggle',
+		firstButtonName: 'First close',
+		secondButtonName: 'Second close',
 	},
 
 	STATES: {
 		first: true,
-		second: false
+		second: true
 	},
 
 	LOGIC() {
-
-		// Change STATES via "show" method
-		this._('#hide-first').onclick = () => {
+		this.$('#hide-first').onclick = () => {
 			this.STATES.first ? this.STATES.first = !this.STATES.first : this.STATES.first = !this.STATES.first;
-			// this.show(this.STATES.first, this.VIEW().first)
-			this.rerender();
+			this.DATA.firstButtonName = this.DATA.firstButtonName == 'First close' ? 'First open' : 'First close';
 		}
-
-		this._('#hide-second').onclick = () => {
+		this.$('#hide-second').onclick = () => {
 			this.STATES.second ? this.STATES.second = !this.STATES.second : this.STATES.second = !this.STATES.second;
-			// this.show(this.STATES.second, this.VIEW().second)
-			this.rerender();
+			this.DATA.secondButtonName = this.DATA.secondButtonName == 'Second close' ? 'Second open' : 'Second close';
 		}
-
 	},
 
 	VIEW() {
 		return {
 			first: `
 				<First>
-					First
+					<div>
+						First Component
+					</div>
 				</First>
 			`,
-			
+
 			second: `
 				<Second>
-					Second
+					<div>
+						Second Component
+					</div>
 				</Second>
 			`,
-			
+
 			toggler: `
 				<Toggler>
 					<button id="hide-first">

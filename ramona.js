@@ -1,9 +1,12 @@
 var Ramona = (function() {
 	return function(conf) {
+		this.die = () => {
+			conf.$(conf.ENTRY).innerHTML = '';
+		}
 		/** 
 		 * Inner method for getting into dom
 		 */
-		conf._ = function(el) {
+		conf.$ = (el) => {
 			var all = document.querySelectorAll(el);
 			return all.length > 1 ? all : document.querySelector(el);
 		}
@@ -27,14 +30,18 @@ var Ramona = (function() {
 		  F.prototype = o;
 		  return new F();
 		}
+		// Views
 		const views = Object.duplicate(conf.VIEW());
 
-	
+		function render() {
+			conf.$(conf.ENTRY).innerHTML = conf.VIEW().render();
+		}
+
 		/** 
 		 * Show template contains in view  
 		 * depending on STATES object property
 		 */
-		conf.show = function(state, view) {
+		function show(state, view) {
 			function parseTagName(view) {
 				return view.slice((view.indexOf('<') + 1), view.indexOf('>'));
 			}
@@ -46,33 +53,35 @@ var Ramona = (function() {
 			if (parseTagName(view).toLowerCase() in views.__proto__) {
 				var template = views.__proto__[parseTagName(view).toLowerCase()];
 				if (state) {
-					conf._(parseTagName(view)).innerHTML = parseProtoStr(template).trim();
-					console.log(parseProtoStr(template).trim())
+					conf.$(parseTagName(view)).innerHTML = parseProtoStr(template).trim();
 				} else {
-					conf._(parseTagName(view)).innerHTML = '';
+					conf.$(parseTagName(view)).innerHTML = '';
 				}
 			}
 		}
 
-		conf.rerender = function() {
+		function rerender() {
 			var data = Object.duplicate(conf.STATES);
 			var dataArray = Object.keys(data.__proto__);
 			for (var i in data.__proto__) {
 				if (dataArray.includes(i)) {
-					conf.show(conf.STATES[i], conf.VIEW()[i]);
+					show(conf.STATES[i], conf.VIEW()[i]);
 				}
 			}	
 		}
 
 		// Init all template into entry element
-		conf._(conf.ENTRY).innerHTML = conf.VIEW().render();
-
-		conf.rerender();
-
-	
-
-		// Init loginc of app
+		render()
+		rerender();
 		conf.LOGIC();
+
+
+		// Watcher
+		conf.$(conf.ENTRY).onclick = () => {
+			render()
+			rerender();
+			conf.LOGIC();
+		}
 	}
 
 }());
