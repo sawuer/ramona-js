@@ -3,6 +3,7 @@ var Ramona = (function() {
 		this.die = () => {
 			conf._(conf.entry).innerHTML = '';
 		}
+
 		/** 
 		 * Inner method for getting into dom
 		 */
@@ -10,7 +11,9 @@ var Ramona = (function() {
 			var all = document.querySelectorAll(el);
 			return all.length > 1 ? all : document.querySelector(el);
 		}
-
+		if (!conf._(conf.entry)) {
+			throw new Error('Make new div with id for new Ramona instance')
+		}
 		/** 
 		 * Duplicate object VIEW for
 		 * constantly collection
