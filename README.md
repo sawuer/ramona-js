@@ -56,9 +56,12 @@ new Ramona({
   }
 });
 ```
-* entry - entry element for component
-* data - all data of component
-* state - boolean props for watching states of view() templates
+
+## Docs
+
+* entry - entry element of your new Ramona instance
+* data - all instance data
+* state - boolean props for watching templates states of view()
 * logic() - all business logic of your component
 * view() - templates
 
@@ -66,18 +69,20 @@ You can notice that state prop "header" are equal view() prop and name of this t
 This is the only way to create a dependency of "state" and "views()".
 If you put "false" into "this.state.header" header will leave the DOM.
 
+### Public methods and props
+
 You can "die" your instance using same name method:
 ```
 // at first create new Ramona instance
 var myApp = new Ramona({
-  // All props
+  // all props and logic
 })
-myApp.die(); // use it anywhere in your app
+myApp.die(); // use it anywhere if you want "kill" your instance
 ```
 You can also use public props if you want:
 ```
 myApp.data.title; // 'Title'
-myApp.entry; // '#myAppName'
+myApp.entry;      // '#myAppName'
 ```
 It's all for now!
 
