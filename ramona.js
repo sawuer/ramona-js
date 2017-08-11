@@ -1,6 +1,5 @@
 /**
- * Ramona Js - simple javascript 
- * lib for creating useful components
+ * Ramona Js - simple javascript lib for creating useful components
  * v1.0.0
  * author: Timurziyev Ruslan 
  * github: https://github.com/sawuer/ramona-js/
@@ -15,12 +14,6 @@ var Ramona = (function() {
 	 */
 	return function(conf) {
 
-		/**
-		 * Public props
-		 */
-		this.data = conf.data;
-		this.entry = conf.entry;
-
 		/** 
 		 * Inner method for getting into dom
 		 */
@@ -30,8 +23,10 @@ var Ramona = (function() {
 		}
 
 		/** 
-		 * Method for avoid app 
+		 * Public props
 		 */
+		this.data = conf.data;
+		this.entry = conf.entry;
 		this.die = () => {
 			conf._(conf.entry).innerHTML = '';
 		}
@@ -39,7 +34,7 @@ var Ramona = (function() {
 		/** 
 		 * Condition: if "entry" prop 
 		 * contains existed element 
-		*/
+		 */
 		if (!conf._(conf.entry)) {
 			throw new Error('You must create div with id for new Ramona instance')
 		}

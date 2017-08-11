@@ -1,7 +1,7 @@
-# Ramona Js - simple javascript lib for creating useful components
+# Ramona Js - simple javascript library for creating useful components
 This is first attempt to create my own Javascript library/framework.
 This is a fairly simple library and a little bit dumb.
-But soon it will become a powerful tool in the hands of the front end developers.
+But soon it will become a powerful tool in the hands of the frontend developers.
 Or only in my hands...
 Now better use the others normal libs like Vue or React :)
 
@@ -9,7 +9,7 @@ Now better use the others normal libs like Vue or React :)
 
 1. Download or clone project copy
 2. Include ramona.js to the top of your page
-3. Create some div behind body tag with id or class (id is better)
+3. Create div with id or class (id is better)
 4. Then include js-file into bottom of the body tag
 ```
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ Now better use the others normal libs like Vue or React :)
 </body>
 </html>
 ```
-5. Into js-file add next code:
+5. Add next code into js-file :
 ```
 new Ramona({
   entry: '#myAppName',
@@ -65,7 +65,7 @@ new Ramona({
 * logic() - all business logic of your component
 * view() - templates
 
-You can notice that state prop "header" are equal view() prop and name of this tag.
+You can notice that state prop "header" are equal to view() prop and name of this tag.
 **This is the only way to create a dependency of "state" and "views()".**
 If you put "false" into "this.state.header" header will leave the DOM.
 
