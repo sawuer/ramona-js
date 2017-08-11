@@ -2,8 +2,8 @@ var app = new Ramona({
 	entry: '#app',
 
 	data: {
-		firstButtonName: 'First open',
-		secondButtonName: 'Second open',
+		firstBtnName: 'First open',
+		secondBtnName: 'Second open',
 	},
 
 	state: {
@@ -15,18 +15,38 @@ var app = new Ramona({
 		var $ = this;
 
 		$._('#hide-first').onclick = () => {
-			$.state.first ? $.state.first = !$.state.first : $.state.first = !$.state.first;
-			$.data.firstButtonName = $.data.firstButtonName == 'First close' ? 'First open' : 'First close';
+			if ($.state.first) {
+				$.state.first = !$.state.first;
+			} else {
+				$.state.first = !$.state.first
+			}
+
+			if ($.data.firstBtnName == 'First open') {
+				$.data.firstBtnName = 'First close';
+			} else {
+				$.data.firstBtnName = 'First open';
+			}
 		}
 
 		$._('#hide-second').onclick = () => {
-			$.data.secondButtonName = $.data.secondButtonName == 'Second close' ? 'Second open' : 'Second close';
-			$.state.second ? $.state.second = !$.state.second : $.state.second = !$.state.second;
+			if ($.state.second) {
+				$.state.second = !$.state.second;
+			} else {
+				$.state.second = !$.state.second
+			}
+
+			if ($.data.secondBtnName == 'Second open') {
+				$.data.secondBtnName = 'Second close';
+			} else {
+				$.data.secondBtnName = 'Second open';
+			}
 		}
+
 	},
 
 	view() {
 		return {
+
 			first: `
 				<first>
 					<div>
@@ -48,8 +68,8 @@ var app = new Ramona({
 					<button id="hide-first">First</button>
 					<button id="hide-second">Second</button>
 					<div>
-						${this.data.firstButtonName}
-						${this.data.secondButtonName}
+						${this.data.firstBtnName}
+						${this.data.secondBtnName}
 					</div.
 				</toggler>
 			`,

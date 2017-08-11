@@ -1,15 +1,25 @@
+/**
+ * Ramona Js - simple javascript 
+ * lib for creating useful components
+ * v1.0.0
+ * author: Timurziyev Ruslan 
+ * github: https://github.com/sawuer/ramona-js/
+ */
+
 var Ramona = (function() {
 
+	/**
+	 * Constructor function.
+	 * But there is no so much 
+	 * public props
+	 */
 	return function(conf) {
+
+		/**
+		 * Public props
+		 */
 		this.data = conf.data;
 		this.entry = conf.entry;
-
-		/** 
-		 * Method for avoid app 
-		 */
-		this.die = () => {
-			conf._(conf.entry).innerHTML = '';
-		}
 
 		/** 
 		 * Inner method for getting into dom
@@ -20,7 +30,14 @@ var Ramona = (function() {
 		}
 
 		/** 
-		 * Conditin: if "entry" prop 
+		 * Method for avoid app 
+		 */
+		this.die = () => {
+			conf._(conf.entry).innerHTML = '';
+		}
+
+		/** 
+		 * Condition: if "entry" prop 
 		 * contains existed element 
 		*/
 		if (!conf._(conf.entry)) {
@@ -58,7 +75,7 @@ var Ramona = (function() {
 		/** 
 		 * Rendering all templates into "entry" element 
 		 */
-		function render() {
+		function renderMainTemplate() {
 			conf._(conf.entry).innerHTML = conf.view().render();
 		}
 
@@ -76,7 +93,7 @@ var Ramona = (function() {
 			}
 
 			/** 
-			 * Get prse from tags 
+			 * Get parse from tags 
 			 */
 			function parseProtoStr(input) {
 				var 
@@ -88,13 +105,13 @@ var Ramona = (function() {
 			}
 
 			/**
-			 * Inner of tamplstes
+			 * Inner html of views
 			 */
 			var template = views.__proto__[parseTagName(view).toLowerCase()];
 			var innerTemp = parseProtoStr(template).trim();
 
 			/** 
-			 * Condigtion: if views.__proto__ contains tagname 
+			 * Condition: if view.__proto__ contains tagname 
 			 */
 			if (parseTagName(view).toLowerCase() in views.__proto__) {
 				if (state) {
@@ -107,10 +124,12 @@ var Ramona = (function() {
 		}
 
 		/**
-		 * Checking states
+		 * Checking states and rerender
+		 * all instance template
 		 */
-		function rerender() {
+		function rerenderMainTemplate() {
 			var state = Object.duplicate(conf.state);
+			// array of conf.state
 			var stateArray = Object.keys(state.__proto__);
 			for (var i in state.__proto__) {
 				if (stateArray.includes(i)) {
@@ -120,18 +139,19 @@ var Ramona = (function() {
 		}
 
 		/** 
-		 * Init all template into entry element
+		 * Init all templates
+		 * Rerendering and logic init
 		 */
-		render()
-		rerender();
+		renderMainTemplate()
+		rerenderMainTemplate();
 		conf.logic();
 
 		/**
 		 * Watcher
 		 */
 		conf._(conf.entry).onclick = () => {
-			render();
-			rerender();
+			renderMainTemplate();
+			rerenderMainTemplate();
 			conf.logic();
 		}
 

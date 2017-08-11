@@ -11,6 +11,20 @@ Now better use the others normal libs like Vue or React :)
 2. Include ramona.js to the top of your page
 3. Create some div behind body tag with id or class (id is better)
 4. Then include js-file into bottom of the body tag
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="ramona.js"></script>
+</head>
+<body>
+  <div id="myAppName"></div>
+  <script type="text/javascript" src="app.js"></script>
+</body>
+</html>
+```
 5. Into js-file add next code:
 ```
 new Ramona({
@@ -22,9 +36,9 @@ new Ramona({
     header: true
   },
   logic() {
-    var $ = this;
-    // all logic
-    // get data or states via $.data.title/$.state.header
+    var $ = this; //
+    // all logic contains it that place
+    // the way getting data or states are $.data.title/$.state.header
   },
   view() {
     return {
@@ -50,9 +64,11 @@ new Ramona({
 
 You can notice that state prop "header" are equal view() prop and name of this tag.
 This is the only way to create a dependency of "state" and "views()".
+If you put "false" into "this.state.header" header will leave the DOM.
 
-You can "die" your instance using die() method like that:
+You can "die" your instance using same name method:
 ```
+// at first create new Ramona instance
 var myApp = new Ramona({
   // All props
 })
