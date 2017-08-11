@@ -16,12 +16,12 @@ Now better use the others normal libs like Vue or React :)
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
-  <script type="text/javascript" src="ramona.js"></script>
+  <title>Title</title>
+  **<script type="text/javascript" src="ramona.js"></script>**
 </head>
 <body>
-  <div id="myAppName"></div>
-  <script type="text/javascript" src="app.js"></script>
+  **<div id="myAppName"></div>**
+  **<script type="text/javascript" src="app.js"></script>**
 </body>
 </html>
 ```
@@ -66,7 +66,7 @@ new Ramona({
 * view() - templates
 
 You can notice that state prop "header" are equal view() prop and name of this tag.
-This is the only way to create a dependency of "state" and "views()".
+**This is the only way to create a dependency of "state" and "views()".**
 If you put "false" into "this.state.header" header will leave the DOM.
 
 ### Public methods and props
