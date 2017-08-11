@@ -1,8 +1,8 @@
 # Ramona Js - simple javascript library for creating useful components
-This is first attempt to create my own Javascript library/framework.
-This is a fairly simple library and a little bit dumb.
+This is the first attempt to create my own Javascript library.
+It's little bit dumb for now.
 But soon it will become a powerful tool in the hands of the frontend developers.
-Or only in my hands...
+Or only in my hands... :)
 Now better use the others normal libs like Vue or React :)
 
 ## Getting Started
@@ -17,11 +17,11 @@ Now better use the others normal libs like Vue or React :)
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  **<script type="text/javascript" src="ramona.js"></script>**
+  <script type="text/javascript" src="ramona.js"></script>
 </head>
 <body>
-  **<div id="myAppName"></div>**
-  **<script type="text/javascript" src="app.js"></script>**
+  <div id="myAppName"></div>
+  <script type="text/javascript" src="app.js"></script>
 </body>
 </html>
 ```
