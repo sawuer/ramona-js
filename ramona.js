@@ -25,17 +25,18 @@ var Ramona = (function() {
 		/** 
 		 * Public props
 		 */
-		this.data = conf.data;
-		this.entry = conf.entry;
+		this.ENTRY = conf.ENTRY;
+		this.STATIC = conf.STATIC;
+
 		this.die = () => {
-			conf._(conf.entry).innerHTML = '';
+			conf._(conf.ENTRY).innerHTML = '';
 		}
 
 		/** 
-		 * Condition: if "entry" prop 
+		 * Condition: if "ENTRY" prop 
 		 * contains existed element 
 		 */
-		if (!conf._(conf.entry)) {
+		if (!conf._(conf.ENTRY)) {
 			throw new Error('You must create div with id for new Ramona instance')
 		}
 
@@ -65,90 +66,77 @@ var Ramona = (function() {
 		/** 
 		 * Views __proto__ 
 		 */
-		const views = Object.duplicate(conf.view());
+		const views = Object.duplicate(conf.VIEW());
 
 		/** 
-		 * Rendering all templates into "entry" element 
+		 * Rendering all templates into "ENTRY" element 
 		 */
 		function renderMainTemplate() {
-			conf._(conf.entry).innerHTML = conf.view().render();
+			conf._(conf.ENTRY).innerHTML = conf.VIEW().render();
 		}
 
 		/** 
-		 * Show template contains in view  
+		 * Show template contains in VIEW  
 		 * depending on state object property
 		 */
-		function show(state, view) {
+		conf.show = (state, VIEW) => {
 
 			/** 
-			 * Parse tag name of view template 
+			 * Parse tag name of VIEW template 
 			 */
-			function parseTagName(view) {
-				return view.slice((view.indexOf('<') + 1), view.indexOf('>'));
+			function parseTagName(VIEW) {
+				return VIEW.slice((VIEW.indexOf('<') + 1), VIEW.indexOf('>'));
 			}
 
 			/** 
 			 * Get parse from tags 
 			 */
 			function parseProtoStr(input) {
-				var 
-					openTag = '<'+parseTagName(view)+'>',
-					closedTag = '</'+parseTagName(view)+'>',
-					openTagEnd = input.indexOf(openTag) + openTag.length,
-					closedTagIndex = input.indexOf(closedTag);
+				var openTag = '<'+parseTagName(VIEW)+'>';
+				var closedTag = '</'+parseTagName(VIEW)+'>';
+				var openTagEnd = input.indexOf(openTag) + openTag.length;
+				var closedTagIndex = input.indexOf(closedTag);
 				return input.slice(openTagEnd, closedTagIndex);
 			}
 
 			/**
 			 * Inner html of views
 			 */
-			var template = views.__proto__[parseTagName(view).toLowerCase()];
+			var template = views.__proto__[parseTagName(VIEW)];
 			var innerTemp = parseProtoStr(template).trim();
 
 			/** 
-			 * Condition: if view.__proto__ contains tagname 
+			 * Condition: if VIEW.__proto__ contains tagname 
 			 */
-			if (parseTagName(view).toLowerCase() in views.__proto__) {
+			if (parseTagName(VIEW).toLowerCase() in views.__proto__) {
 				if (state) {
-					conf._(parseTagName(view)).innerHTML = innerTemp;
+					conf._(parseTagName(VIEW)).innerHTML = innerTemp;
 				} else {
-					conf._(parseTagName(view)).innerHTML = '';
+					conf._(parseTagName(VIEW)).innerHTML = '';
 				}
 			}
 
 		}
 
 		/**
-		 * Checking states and rerender
-		 * all instance template
+		 * Checking states
 		 */
 		function rerenderMainTemplate() {
 			var state = Object.duplicate(conf.state);
-			// array of conf.state
 			var stateArray = Object.keys(state.__proto__);
 			for (var i in state.__proto__) {
 				if (stateArray.includes(i)) {
-					show(conf.state[i], conf.view()[i]);
+					conf.show(conf.STATES[i], conf.VIEW()[i]);
 				}
 			}	
 		}
 
 		/** 
-		 * Init all templates
-		 * Rerendering and logic init
+		 * Init all template into ENTRY element
 		 */
 		renderMainTemplate()
 		rerenderMainTemplate();
-		conf.logic();
-
-		/**
-		 * Watcher
-		 */
-		conf._(conf.entry).onclick = () => {
-			renderMainTemplate();
-			rerenderMainTemplate();
-			conf.logic();
-		}
+		conf.LOGIC();
 
 	}
 

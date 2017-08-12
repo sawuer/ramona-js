@@ -1,8 +1,8 @@
 # Ramona Js 
-Ramona Js - simple javascript library for creating useful components which have own data, states, view, and logic.
-This is the first attempt to create my own Javascript library.
+Ramona Js - simple js library for creating useful frontend components which have own **static porps, states, views, and logic.**
+This is the first attempt to create my own javascript library.
 It's little bit dumb for now.
-But soon it will become a powerful tool in the hands of the frontend developers.
+But soon maybe it will become a powerful tool in the hands of the frontend developers.
 Or only in my hands... :)
 Now better use the others normal libs like Vue or React :)
 
@@ -10,8 +10,8 @@ Now better use the others normal libs like Vue or React :)
 
 1. Download or clone project copy
 2. Include ramona.js to the top of your page
-3. Create div with id or class (id is better)
-4. Then include js-file into bottom of the body tag
+3. Create div with id
+4. Then include js-file into bottom of the body
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -29,23 +29,23 @@ Now better use the others normal libs like Vue or React :)
 5. Add next code into js-file :
 ```
 new Ramona({
-  entry: '#myAppName',
-  data: {
-    title: 'Title'
+  ENTRY: '#myAppName',
+  STATIC: {
+    headerTitle: 'Header'
   },
-  state: {
+  STATES: {
     header: true
   },
   logic() {
-    var $ = this; //
+    var th = this; // In the future you need it for calling this context from your objects
     // all logic contains it that place
-    // the way getting data or states are $.data.title/$.state.header
+    // the way getting states - "th.STATES.header"
   },
-  view() {
+  VIEW() {
     return {
       header: `
         <header>
-          <h1>${this.data.title}</h1>
+          <h1>${this.STATIC.headerTitle}</h1>
         </header>
       `,
       render() {
@@ -60,15 +60,15 @@ new Ramona({
 
 ## Docs
 
-* entry - entry element of your new Ramona instance
-* data - all instance data
-* state - boolean props for watching templates states of view()
-* logic() - all business logic of your component
-* view() - templates
+* ENTRY - entry element of your new Ramona instance
+* STATIC - static props
+* STATES - boolean props for watching templates states of VIEW()
+* LOGIC() - all business logic of your component
+* VIEW() - templates
 
-You can notice that state prop "header" are equal to view() prop and name of this tag.
-**This is the only way to create a dependency of "state" and "views()".**
-If you put "false" into "this.state.header" header will leave the DOM.
+You can notice that STATES prop "header" are equal to VIEW() prop and name of this tag.
+**This is the only way to create a dependency of "STATES" and "VIEW()".**
+If you put "false" into "this.STATES.header" header will leave the DOM.
 
 ### Public methods and props
 
@@ -80,10 +80,10 @@ var myApp = new Ramona({
 })
 myApp.die(); // use it anywhere if you want "kill" your instance
 ```
-You can also use public props if you want:
+You can also use public prop if you want for instances manipulation:
 ```
-myApp.data.title; // 'Title'
-myApp.entry;      // '#myAppName'
+myApp.ENTRY; // '#myAppName'
+myApp.STATIC.headerTitle; // 'Header'
 ```
 It's all for now!
 
