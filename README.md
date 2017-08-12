@@ -1,5 +1,5 @@
-# Ramona Js 
-Ramona Js - simple js library for creating useful frontend components which have own **static props, states, views, and logic.**
+in Ramona Js 
+Ramona Js - simple js library for creating useful components which have own **entry element, static props, states, views, and logic.**
 This is the first attempt to create my own javascript library.
 It's little bit dumb for now.
 But soon maybe it will become a powerful tool in the hands of the frontend developers.
@@ -29,23 +29,23 @@ Now better use the others normal libs like Vue or React :)
 5. Add next code into js-file :
 ```
 new Ramona({
-  ENTRY: '#myAppName',
-  STATIC: {
+  in: '#myAppName',
+  static: {
     headerTitle: 'Header'
   },
-  STATES: {
+  state: {
     header: true
   },
-  LOGIC() {
+  heart() {
     var th = this; // In the future you need it for calling this context from your objects
     // all logic contains it that place
-    // the way getting states - "th.STATES.header"
+    // the way getting state - "th.state.header"
   },
-  VIEW() {
+  view() {
     return {
       header: `
         <header>
-          <h1>${this.STATIC.headerTitle}</h1>
+          <h1>${this.static.headerTitle}</h1>
         </header>
       `,
       render() {
@@ -60,15 +60,15 @@ new Ramona({
 
 ## Docs
 
-* ENTRY - entry element of your new Ramona instance
-* STATIC - static props
-* STATES - boolean props for watching templates states of VIEW()
-* LOGIC() - all business logic of your component
-* VIEW() - templates
+* in - entry element of your new Ramona instance
+* static - static props
+* state - boolean props for watching templates state of view()
+* heart() - all business heart of your component
+* view() - templates
 
-You can notice that STATES prop "header" are equal to VIEW() prop and name of this tag.
-**This is the only way to create a dependency of "STATES" and "VIEW()".**
-If you put "false" into "this.STATES.header" header will leave the DOM.
+You can notice that state prop "header" are equal to view() prop and name of this tag.
+**This is the only way to create a dependency of "state" and "view()".**
+If you put "false" into "this.state.header" header will leave the DOM.
 
 ### Public methods and props
 
@@ -76,14 +76,14 @@ You can "die" your instance using same name method:
 ```
 // Create new Ramona instance at first
 var myApp = new Ramona({
-  // all props and logic
+  // all props and heart
 })
 myApp.die(); // use it anywhere if you want "kill" your instance
 ```
 You can also use public prop if you want for instances manipulation:
 ```
-myApp.ENTRY; // '#myAppName'
-myApp.STATIC.headerTitle; // 'Header'
+myApp.in; // '#myAppName'
+myApp.static.headerTitle; // 'Header'
 ```
 It's all for now!
 

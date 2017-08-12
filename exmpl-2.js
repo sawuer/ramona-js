@@ -1,21 +1,21 @@
 var app = new Ramona({
-	ENTRY: '#app',
+	in: '#app',
 
-  STATIC: {
+  static: {
     appName: 'Todo',
     exampleTodos: ['Walk the dog', 'Lorem ipsum', 'Some do']
   },
 
-	STATES: {
-		todolist: true
+	state: {
+		list: true
 	},
 
-	LOGIC() {
+	heart() {
 		var th = this;
 
 		var Todo = (function() {
 			// All todos
-			var todos = th.STATIC.exampleTodos;
+			var todos = th.static.exampleTodos;
 			// Private methods
 			function printTodoList(el) {
 				if (th._(el)) {
@@ -43,21 +43,21 @@ var app = new Ramona({
 
 			function showList(elClick) {
 				th._(elClick).onclick = () => {
-					if (th.STATES.todolist === true) {
-						th.STATES.todolist = false;
+					if (th.state.list === true) {
+						th.state.list = false;
 					} else {
-						th.STATES.todolist = true;
+						th.state.list = true;
 					}
-					th.show(th.STATES.todolist, th.VIEW().todolist);
+					th.show(th.state.list, th.view().list);
 					printTodoList('#todo-list');
 				}
 				printTodoList('#todo-list');
 			}
 
 			function deleteTodo() {
-				var todoList = th._('#todo-list');
-				var todo = todoList.querySelectorAll('li');
-				var todoX = todoList.querySelectorAll('li button');
+				var list = th._('#todo-list');
+				var todo = list.querySelectorAll('li');
+				var todoX = list.querySelectorAll('li button');
 				todoX.forEach(i => {
 					i.onclick = (e) => {
 						var innerText = e.target.parentNode.innerHTML;
@@ -84,35 +84,35 @@ var app = new Ramona({
 
 	},
 
-	VIEW() {
+	view() {
 		return { 
 			header: `
 				<header>
-					<h1>${this.STATIC.appName}</h1>
+					<h1>${this.static.appName}</h1>
 				</header>
 			`,
 
-			todolist: `
-				<todolist>
+			list: `
+				<list>
 					<ul id="todo-list"></ul>
-				</todolist>
+				</list>
 			`,
 
-			appform: `
-				<appform>
+			form: `
+				<form>
 					<form type="text">
 						<input id="new-todo"  type="text" />
 						<button id="add-todo" type="submit">Submit</button>
 					</form>
 					<button id="show-list">List toggle</button>
-				</appform>
+				</form>
 			`,
 
 			render() {
 				return `
 					${this.header}
-					${this.appform}
-					${this.todolist}
+					${this.form}
+					${this.list}
 				`;
 			}
 		}
