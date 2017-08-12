@@ -1,5 +1,5 @@
 # Ramona Js 
-Ramona Js - simple js library for creating useful frontend components which have own **static porps, states, views, and logic.**
+Ramona Js - simple js library for creating useful frontend components which have own **static props, states, views, and logic.**
 This is the first attempt to create my own javascript library.
 It's little bit dumb for now.
 But soon maybe it will become a powerful tool in the hands of the frontend developers.
@@ -36,7 +36,7 @@ new Ramona({
   STATES: {
     header: true
   },
-  logic() {
+  LOGIC() {
     var th = this; // In the future you need it for calling this context from your objects
     // all logic contains it that place
     // the way getting states - "th.STATES.header"
@@ -74,7 +74,7 @@ If you put "false" into "this.STATES.header" header will leave the DOM.
 
 You can "die" your instance using same name method:
 ```
-// at first create new Ramona instance
+// Create new Ramona instance at first
 var myApp = new Ramona({
   // all props and logic
 })
