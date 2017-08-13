@@ -1,4 +1,4 @@
-** Ramona Js 
+### Ramona Js 
 Ramona Js - simple js library for creating useful components which have own **entry element, static props, states, views, and logic.**
 This is the first attempt to create my own javascript library.
 It's little bit dumb for now.
