@@ -31,9 +31,9 @@ var Ramona = (function() {
 		 * Condition: if "in" prop 
 		 * contains existed element 
 		 */
-		if (!conf._(conf.in)) {
-			throw new Error('You must create div with id for new Ramona instance')
-		}
+		// if (!conf._(conf.in)) {
+		// 	throw new Error('You must create div with id for new Ramona instance')
+		// }
 
 		/** 
 		 * Duplicate object view for
@@ -67,7 +67,9 @@ var Ramona = (function() {
 		 * Rendering all templates into "in" element 
 		 */
 		function renderMainTemplate() {
-			conf._(conf.in).innerHTML = conf.view().render();
+			if (conf._(conf.in)) {
+				conf._(conf.in).innerHTML = conf.view().render();
+			}
 		}
 
 		/** 
@@ -100,7 +102,7 @@ var Ramona = (function() {
 			var template = views.__proto__[parseTagName(view)];
 			var innerTemp = parseProtoStr(template).trim();
 
-			/** 
+			/**
 			 * Condition: if view.__proto__ contains tagname 
 			 */
 			if (parseTagName(view).toLowerCase() in views.__proto__) {
@@ -131,7 +133,15 @@ var Ramona = (function() {
 		 */
 		renderMainTemplate()
 		rerenderMainTemplate();
+
+		if (!conf.heart) {
+			throw new Error("Heart doesn't exist!")
+		}
 		conf.heart();
+
+		return {
+			renderMainTemplate
+		}
 
 	}
 
