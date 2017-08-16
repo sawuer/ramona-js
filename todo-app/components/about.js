@@ -1,6 +1,4 @@
-var home = new Ramona({
-	in: '#inHome',
-
+var Home = new Ramona('#home', {
 	static: {
 		title: 'Home page'
 	},
@@ -11,16 +9,13 @@ var home = new Ramona({
 
 	view() {
 		return {
-			inhome: `
-				<inhome>
-					<h3>${this.static.title}</h3>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ipsa, ex possimus consectetur corporis adipisci dolor omnis molestiae accusantium, quae voluptas, molestias voluptate magni a exercitationem excepturi aperiam laboriosam, numquam aliquam expedita culpa sapiente doloremque eos? Temporibus repudiandae ex ut.</p>
-				</inhome>
+			tmpl: `
+				<h3>${this.static.title}</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur ipsa, ex possimus consectetur corporis adipisci dolor omnis molestiae accusantium, quae voluptas, molestias voluptate magni a exercitationem excepturi aperiam laboriosam, numquam aliquam expedita culpa sapiente doloremque eos? Temporibus repudiandae ex ut.</p>
 			`,
+			
 			render() {
-				return `
-					${this.inhome}
-				`
+				return `${this.tmpl}`
 			}
 		}
 	}

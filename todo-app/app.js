@@ -1,6 +1,4 @@
-new Ramona({
-	in: '#todoApp',
-
+var App = new Ramona('#todoApp', {
   static: {
     appName: 'Ramona JS todo-manager',
     exampleTodos: ['Walk the dog']
@@ -16,7 +14,7 @@ new Ramona({
 		/**
 		 * Todo * * * * * * * * * * 
 		 */
-		var Todo = (function() {
+		var todoManipulator = (function() {
 			// All todos
 			var todos = th.static.exampleTodos;
 			// Private methods
@@ -50,11 +48,9 @@ new Ramona({
 							var lastIndex = th._('#todo-list').querySelectorAll('li').length-1;
 							var last = th._('#todo-list').querySelectorAll('li')[lastIndex];
 								last.classList.add('fadeInDown');
-
 						}
 						th._(input).value = '';	
 					}
-					
 				}
 			}
 
@@ -83,14 +79,14 @@ new Ramona({
 			}
 
 		}());
-		/* * * * * * End of Todo * * * * * */	
+		/* * * * * * End of todoManipulator * * * * * */	
 
 	
 
 		/**
 		 * Router * * * * * * * * * * 
 		 */
-		var Router = (function() {
+		var router = (function() {
 
 			function route(el, state, view) {
 				th._(el).onclick = () => {
@@ -101,14 +97,15 @@ new Ramona({
 					state = true;
 					th.show(state, view);
 					if (el === '#getTodo') {
-						todo.renderMainTemplate()
-						Todo.init();	
+						Todo.renderMainTemplate()
+						todoManipulator.init();	
 					}
 					if (el === '#getAbout') {
-						home.renderMainTemplate()
+						Home.renderMainTemplate()
 					}
 				}
 			}
+
 			return {
 				todo() {
 					return route('#getTodo', th.state.todo, th.view().todo);
@@ -119,19 +116,16 @@ new Ramona({
 			}
 
 		}());
-		/** End of Router * * * * * * * * * */
+		/** End of router * * * * * * * * * */
 
-		Todo.init();
-		Router.todo();
-		Router.home();
-
-
+		todoManipulator.init();
+		router.todo();
+		router.home();
 		
 	},
 
 	view() {
 		return { 
-
 			header: `
 				<header>
 				  <nav>
@@ -147,9 +141,17 @@ new Ramona({
 				</header>
 			`,
 
-			todo: `<todo><div class="animated fadeIn" id="inTodo"></div></todo>`,
+			todo: `
+				<todo>
+					<div class="animated fadeIn" id="todo"></div>
+				</todo>
+			`,
 
-			home: `<home><div class="animated fadeIn" id="inHome"></div></home>`,
+			home: `
+				<home>
+					<div class="animated fadeIn" id="home"></div>
+				</home>
+			`,
 
 			render() {
 				return `

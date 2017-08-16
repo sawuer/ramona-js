@@ -7,7 +7,7 @@
 
 var Ramona = (function() {
 
-	return function(conf) {
+	return function(entry, conf) {
 
 		/** 
 		 * Inner method for getting into dom
@@ -20,18 +20,18 @@ var Ramona = (function() {
 		/** 
 		 * Public props
 		 */
-		this.in = conf.in;
+		this.entry = entry;
 		this.static = conf.static;
 
 		this.die = () => {
-			conf._(conf.in).innerHTML = '';
+			conf._(entry).innerHTML = '';
 		}
 
 		/** 
 		 * Condition: if "in" prop 
 		 * contains existed element 
 		 */
-		// if (!conf._(conf.in)) {
+		// if (!conf._(entry)) {
 		// 	throw new Error('You must create div with id for new Ramona instance')
 		// }
 
@@ -67,8 +67,8 @@ var Ramona = (function() {
 		 * Rendering all templates into "in" element 
 		 */
 		function renderMainTemplate() {
-			if (conf._(conf.in)) {
-				conf._(conf.in).innerHTML = conf.view().render();
+			if (conf._(entry)) {
+				conf._(entry).innerHTML = conf.view().render();
 			}
 		}
 
