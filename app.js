@@ -1,7 +1,6 @@
 var $_App = Ramona.create({
-	core: {
-		title: 'New Ramona App'
-	},
+	
+	core: {},
 
 	view() {
 		return `
@@ -11,7 +10,6 @@ var $_App = Ramona.create({
 		`
 	},
 
-	logic() {
+	logic() {}
 
-	}
 });

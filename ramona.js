@@ -98,7 +98,7 @@ var Ramona = (function() {
 
 				// Reg for models
 				function reg(num) {
-					return new RegExp(`{% ${dataKeys[num]} %}`, 'g')
+					return new RegExp(`{ ${dataKeys[num]} }`, 'g')
 				}
 
 				// Get models
@@ -173,7 +173,7 @@ var Ramona = (function() {
 
 						// Reg for models
 						function reg(num) {
-							return new RegExp(`{% ${dataKeys[num]} %}`, 'g')
+							return new RegExp(`{ ${dataKeys[num]} }`, 'g')
 						}
 
 						// Get models
