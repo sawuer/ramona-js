@@ -7,8 +7,8 @@ var $_Page2 = Ramona.create({
 
 	view() {
 		return `
-			<h2>{ title }</h2>
-			<p>{ text }</p>		
+			<h2>{title}</h2>
+			<p>{text}</p>		
 		`
 	},
 

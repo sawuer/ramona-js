@@ -85,6 +85,7 @@ var Ramona = (function() {
 				}
 				return document.querySelector(el);
 			},
+			/* --------- End of Query elements method ----------- */
 
 			stateUp: function(data, newData) {
 				var that = this;
@@ -98,7 +99,7 @@ var Ramona = (function() {
 
 				// Reg for models
 				function reg(num) {
-					return new RegExp(`{ ${dataKeys[num]} }`, 'g')
+					return new RegExp(`{${dataKeys[num]}}`, 'g')
 				}
 
 				// Get models
@@ -173,7 +174,7 @@ var Ramona = (function() {
 
 						// Reg for models
 						function reg(num) {
-							return new RegExp(`{ ${dataKeys[num]} }`, 'g')
+							return new RegExp(`{${dataKeys[num]}}`, 'g')
 						}
 
 						// Get models
